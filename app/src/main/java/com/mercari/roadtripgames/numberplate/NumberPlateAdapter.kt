@@ -9,14 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mercari.roadtripgames.R
 import kotlinx.android.synthetic.main.layout_number_plate.view.*
 
-class NumberPlateAdapter: RecyclerView.Adapter<NumberPlateAdapter.ViewHolder>() {
-
-    private val numberPlates = NumberPlateType.values()
+class NumberPlateAdapter(private val numberPlates: List<NumberPlate>): RecyclerView.Adapter<NumberPlateAdapter.ViewHolder>() {
 
     override fun getItemCount(): Int = numberPlates.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val numberPlateType = numberPlates[position]
+        val numberPlateType = numberPlates[position].type
         holder.setStateTitle(numberPlateType.stateName)
         holder.setSlogan(numberPlateType.slogan)
         numberPlateType.image?.let { holder.setImage(it) }

@@ -13,6 +13,7 @@ import javax.inject.Inject
 class NumberPlateActivity  : AppCompatActivity() {
 
     @Inject lateinit var viewModel: NumberPlateViewModel
+    private val numberPlateAdapter = NumberPlateAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,10 +28,12 @@ class NumberPlateActivity  : AppCompatActivity() {
     }
 
     private fun setupRecyclerView() {
+        numberPlateAdapter.setOnPlateFoundListener { viewModel.onPlateFound(it) }
+        number_plate_list.apply {
+            adapter = numberPlateAdapter
+        }
         viewModel.numberPlates.observe(this, Observer {
-            number_plate_list.apply {
-                adapter = NumberPlateAdapter(it)
-            }
+            numberPlateAdapter.submitList(it)
         })
     }
 }

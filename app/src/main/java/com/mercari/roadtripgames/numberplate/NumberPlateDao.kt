@@ -1,18 +1,19 @@
 package com.mercari.roadtripgames.numberplate
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.lifecycle.LiveData
+import androidx.room.*
 
 @Dao
 interface NumberPlateDao {
 
     @Query("SELECT * from numberplate")
-    suspend fun getAll(): List<NumberPlate>
+    fun getAll(): LiveData<List<NumberPlate>>
 
     @Insert
-    suspend fun insertAll(numberPlate: List<NumberPlate>)
+    suspend fun insertAll(numberPlates: List<NumberPlate>)
+
+    @Update
+    suspend fun update(numberPlate: NumberPlate)
 
     @Delete
     suspend fun delete(numberPlate: NumberPlate)

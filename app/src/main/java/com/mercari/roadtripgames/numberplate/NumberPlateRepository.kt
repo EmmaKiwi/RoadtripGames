@@ -5,8 +5,10 @@ import javax.inject.Inject
 
 class NumberPlateRepository @Inject constructor(private val database: AppDatabase) {
 
-    suspend fun getNumberPlates() = database.numberPlateDao().getAll()
+    fun getNumberPlates() = database.numberPlateDao().getAll()
 
     suspend fun insertNumberPlates(numberPlates: List<NumberPlate>) =
         database.numberPlateDao().insertAll(numberPlates)
+
+    suspend fun updatePlate(plate: NumberPlate) = database.numberPlateDao().update(plate)
 }

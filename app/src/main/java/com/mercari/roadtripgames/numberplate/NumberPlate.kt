@@ -8,6 +8,6 @@ import androidx.room.PrimaryKey
 data class NumberPlate(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     @ColumnInfo val type: NumberPlateType,
-    @ColumnInfo val isFound: Boolean = false,
-    @ColumnInfo val dateFound: String? = null
+    @ColumnInfo var isFound: Boolean = false,
+    @ColumnInfo var dateFound: String? = null
 )

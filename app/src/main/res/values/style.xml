@@ -11,13 +11,12 @@
     <style name="NumberPlate"></style>
 
     <style name="NumberPlate.Title">
-        <item name="android:textSize">24sp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:paddingTop">16dp</item>
     </style>
 
     <style name="NumberPlate.Subtitle">
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:paddingTop">4dp</item>
         <item name="android:textColor">@color/subtitle</item>
     </style>

@@ -43,6 +43,42 @@
 
     </LinearLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/complete_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/dark_frost"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/complete_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/complete"
+            android:textSize="44sp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:shadowColor="#ffffff"
+            android:shadowRadius="15"
+            android:shadowDx="10"
+            android:shadowDy="5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="152dp"/>
+
+        <Button
+            android:id="@+id/play_again_button"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="@string/play_again"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/complete_title"
+            android:layout_marginTop="28dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <nl.dionsegijn.konfetti.KonfettiView
         android:id="@+id/viewKonfetti"
         android:layout_width="match_parent"

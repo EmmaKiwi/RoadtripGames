@@ -19,6 +19,19 @@ class NumberPlateViewModel @Inject constructor(
             }
         }
     }
+    val isAllPlatesFound = MutableLiveData<Boolean>()
+
+    fun resetPlates() {
+        numberPlates.value?.map {
+            it.isFound = false
+            it
+        }?.let {
+            viewModelScope.launch {
+                repository.resetAllPlates(it)
+            }
+            numberPlates.postValue(it)
+        }
+    }
 
     fun insertNewPlates(plates: List<NumberPlate>) {
         viewModelScope.launch {
@@ -29,6 +42,8 @@ class NumberPlateViewModel @Inject constructor(
     fun onPlateFound(plate: NumberPlate) {
         viewModelScope.launch {
             repository.updatePlate(plate)
+            val allFound = numberPlates.value?.all { it.isFound }
+            isAllPlatesFound.postValue(allFound)
         }
     }
 

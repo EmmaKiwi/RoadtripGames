@@ -11,4 +11,6 @@ class NumberPlateRepository @Inject constructor(private val database: AppDatabas
         database.numberPlateDao().insertAll(numberPlates)
 
     suspend fun updatePlate(plate: NumberPlate) = database.numberPlateDao().update(plate)
+
+    suspend fun resetAllPlates(plates: List<NumberPlate>) = database.numberPlateDao().updateAll(plates)
 }

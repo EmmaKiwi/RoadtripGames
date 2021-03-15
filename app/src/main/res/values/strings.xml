@@ -12,4 +12,6 @@
 
     <string name="number_plate_title">Number Plate Game</string>
     <string name="congratulations">Congratulations!!</string>
+    <string name="complete">You found all of them!</string>
+    <string name="play_again">Play again?</string>
 </resources>

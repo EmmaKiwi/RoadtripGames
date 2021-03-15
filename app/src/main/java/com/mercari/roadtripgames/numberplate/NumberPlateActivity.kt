@@ -42,6 +42,19 @@ class NumberPlateActivity  : AppCompatActivity() {
         viewModel.numberPlates.observe(this, Observer {
             numberPlateAdapter.submitList(it)
         })
+        viewModel.isAllPlatesFound.observe(this, Observer { gameComplete ->
+            if (gameComplete) {
+                complete_layout.visibility = View.VISIBLE
+                play_again_button.setOnClickListener {
+                    playAgain()
+                }
+            }
+        })
+    }
+
+    private fun playAgain() {
+        complete_layout.visibility = View.GONE
+        viewModel.resetPlates()
     }
 
     private fun onPlateFound() {

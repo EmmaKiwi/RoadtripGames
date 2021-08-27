@@ -2,8 +2,8 @@ package com.mercari.roadtripgames.numberplate
 
 import android.graphics.Color
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.mercari.roadtripgames.R
@@ -28,13 +28,29 @@ class NumberPlateActivity  : AppCompatActivity() {
             .build()
             .inject(this)
 
+        setupToolbar()
         setupRecyclerView()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> finish()
+        }
+        return true
+    }
+
+    private fun setupToolbar() {
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     private fun setupRecyclerView() {
         numberPlateAdapter.setOnPlateFoundListener {
-            viewModel.onPlateFound(it)
-            onPlateFound()
+            viewModel.onPlateUpdated(it)
+            if (it.isFound) {
+                onPlateFound()
+            }
         }
         number_plate_list.apply {
             adapter = numberPlateAdapter

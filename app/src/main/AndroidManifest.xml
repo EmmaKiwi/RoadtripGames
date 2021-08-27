@@ -19,7 +19,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".numberplate.NumberPlateActivity" />
+        <activity
+            android:name=".numberplate.NumberPlateActivity"
+            android:theme="@style/Theme.RoadtripGames.NoActionBar" />
     </application>
 
 </manifest>

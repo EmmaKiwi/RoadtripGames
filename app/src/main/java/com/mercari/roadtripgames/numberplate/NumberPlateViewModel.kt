@@ -39,7 +39,7 @@ class NumberPlateViewModel @Inject constructor(
         }
     }
 
-    fun onPlateFound(plate: NumberPlate) {
+    fun onPlateUpdated(plate: NumberPlate) {
         viewModelScope.launch {
             repository.updatePlate(plate)
             val allFound = numberPlates.value?.all { it.isFound }

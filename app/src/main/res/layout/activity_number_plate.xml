@@ -6,12 +6,26 @@
     android:animateLayoutChanges="true"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:minHeight="?attr/actionBarSize"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:titleTextColor="@color/text_on_dark_bg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/theme_primary">
+
+
+    </androidx.appcompat.widget.Toolbar>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/number_plate_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         />
@@ -31,7 +45,7 @@
             android:id="@+id/congratulations"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:textColor="@color/text_primary"
             android:layout_marginTop="92dp"
             android:textAlignment="center"
             android:textSize="44sp"
@@ -57,7 +71,7 @@
             android:text="@string/complete"
             android:textSize="44sp"
             android:textAlignment="center"
-            android:textColor="@color/white"
+            android:textColor="@color/text_on_dark_bg"
             android:shadowColor="#ffffff"
             android:shadowRadius="15"
             android:shadowDx="10"

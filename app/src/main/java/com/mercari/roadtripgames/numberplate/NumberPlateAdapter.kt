@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatCheckBox
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -30,8 +31,8 @@ class NumberPlateAdapter: ListAdapter<NumberPlate, NumberPlateAdapter.ViewHolder
         holder.setSlogan(numberPlateType.slogan)
         holder.setIsFound(plate.isFound)
         numberPlateType.image?.let { holder.setImage(it) }
-        holder.setPlateFoundListener { found ->
-            plate.isFound = found
+        holder.setPlateFoundListener {
+            plate.isFound = !plate.isFound
             onPlateFoundListener?.invoke(plate)
         }
     }
@@ -43,11 +44,11 @@ class NumberPlateAdapter: ListAdapter<NumberPlate, NumberPlateAdapter.ViewHolder
         return ViewHolder(view)
     }
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         private val stateTitle: TextView = view.state_title
         private val slogan: TextView = view.state_slogan
         private val image: ImageView = view.state_image
-        private val checkBox: AppCompatCheckBox = view.state_found
+        private val checkbox: ImageView = view.state_found
 
         fun setStateTitle(title: String) {
             stateTitle.text = title
@@ -62,15 +63,11 @@ class NumberPlateAdapter: ListAdapter<NumberPlate, NumberPlateAdapter.ViewHolder
         }
 
         fun setIsFound(found: Boolean) {
-            checkBox.isChecked = found
+            checkbox.isVisible = found
         }
 
-        fun setPlateFoundListener(listener: (Boolean) -> Unit) {
-            checkBox.setOnCheckedChangeListener { buttonView, isChecked ->
-                if (buttonView.isPressed) {
-                    listener.invoke(isChecked)
-                }
-            }
+        fun setPlateFoundListener(listener: () -> Unit) {
+            view.setOnClickListener { listener.invoke() }
         }
     }
 

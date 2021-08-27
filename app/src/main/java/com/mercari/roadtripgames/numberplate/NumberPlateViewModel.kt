@@ -8,7 +8,8 @@ class NumberPlateViewModel @Inject constructor(
     private val repository: NumberPlateRepository
 ) : ViewModel() {
 
-    val numberPlates = MediatorLiveData<List<NumberPlate>>().apply {
+    private var filterString = MutableLiveData<String?>()
+    private val allNumberPlates = MediatorLiveData<List<NumberPlate>>().apply {
         addSource(repository.getNumberPlates()) { plates ->
             value = if (plates.isEmpty()) {
                 val generatedPlates = generatePlates()
@@ -19,7 +20,20 @@ class NumberPlateViewModel @Inject constructor(
             }
         }
     }
+    val numberPlates = Transformations.switchMap(filterString) { filter ->
+        allNumberPlates.map { plates ->
+            filter?.let { filter ->
+                plates.filter {
+                    it.type.stateName.toLowerCase().contains(filter.toLowerCase())
+                }
+            } ?: plates
+        }
+    }
     val isAllPlatesFound = MutableLiveData<Boolean>()
+
+    init {
+        filterString.postValue(null)
+    }
 
     fun resetPlates() {
         numberPlates.value?.map {
@@ -29,8 +43,12 @@ class NumberPlateViewModel @Inject constructor(
             viewModelScope.launch {
                 repository.resetAllPlates(it)
             }
-            numberPlates.postValue(it)
+            allNumberPlates.postValue(it)
         }
+    }
+
+    fun filterPlates(text: String) {
+        filterString.postValue(text)
     }
 
     fun insertNewPlates(plates: List<NumberPlate>) {

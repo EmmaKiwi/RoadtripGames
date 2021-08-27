@@ -50,7 +50,7 @@ class NumberPlateActivity  : AppCompatActivity() {
     private fun setupSearch() {
         search.setOnEditorActionListener { v, actionId, event ->
             return@setOnEditorActionListener when (actionId) {
-                EditorInfo.IME_ACTION_SEND -> {
+                EditorInfo.IME_ACTION_SEARCH -> {
                     searchStates(v.text.toString())
                     true
                 }
@@ -83,7 +83,7 @@ class NumberPlateActivity  : AppCompatActivity() {
     }
 
     private fun searchStates(text: String) {
-        
+        viewModel.filterPlates(text)
     }
 
     private fun playAgain() {

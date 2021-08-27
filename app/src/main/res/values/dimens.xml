@@ -1,6 +1,7 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="thumbnail_size">24dp</dimen>
-    <dimen name="med_margin">16dp</dimen>
+    <dimen name="med_spacing">16dp</dimen>
+    <dimen name="sm_spacing">8dp</dimen>
     <dimen name="round_corner">5dp</dimen>
 </resources>

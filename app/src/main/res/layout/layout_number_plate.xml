@@ -46,9 +46,9 @@
         android:layout_width="@dimen/thumbnail_size"
         android:layout_height="@dimen/thumbnail_size"
         android:src="@drawable/green_check"
-        android:layout_marginEnd="@dimen/med_margin"
-        android:layout_marginTop="@dimen/med_margin"
-        android:layout_marginBottom="@dimen/med_margin"
+        android:layout_marginEnd="@dimen/med_spacing"
+        android:layout_marginTop="@dimen/med_spacing"
+        android:layout_marginBottom="@dimen/med_spacing"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />

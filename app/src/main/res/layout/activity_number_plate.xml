@@ -17,6 +17,16 @@
         app:layout_constraintTop_toTopOf="parent"
         android:background="@color/theme_primary">
 
+        <EditText
+            android:id="@+id/search"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/sm_spacing"
+            android:paddingHorizontal="@dimen/med_spacing"
+            android:background="@drawable/search_background"
+            android:hint="@string/number_plate_search_placeholder"
+            android:inputType="text"
+            android:imeOptions="actionSearch" />
 
     </androidx.appcompat.widget.Toolbar>
 

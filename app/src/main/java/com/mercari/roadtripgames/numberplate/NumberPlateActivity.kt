@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.mercari.roadtripgames.R
@@ -29,6 +30,7 @@ class NumberPlateActivity  : AppCompatActivity() {
             .inject(this)
 
         setupToolbar()
+        setupSearch()
         setupRecyclerView()
     }
 
@@ -43,6 +45,18 @@ class NumberPlateActivity  : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    private fun setupSearch() {
+        search.setOnEditorActionListener { v, actionId, event ->
+            return@setOnEditorActionListener when (actionId) {
+                EditorInfo.IME_ACTION_SEND -> {
+                    searchStates(v.text.toString())
+                    true
+                }
+                else -> false
+            }
+        }
     }
 
     private fun setupRecyclerView() {
@@ -66,6 +80,10 @@ class NumberPlateActivity  : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    private fun searchStates(text: String) {
+        
     }
 
     private fun playAgain() {

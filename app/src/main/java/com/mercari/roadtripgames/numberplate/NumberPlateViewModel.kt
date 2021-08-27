@@ -51,6 +51,10 @@ class NumberPlateViewModel @Inject constructor(
         filterString.postValue(text)
     }
 
+    fun clearSearch() {
+        filterString.postValue(null)
+    }
+
     fun insertNewPlates(plates: List<NumberPlate>) {
         viewModelScope.launch {
             repository.insertNumberPlates(plates)

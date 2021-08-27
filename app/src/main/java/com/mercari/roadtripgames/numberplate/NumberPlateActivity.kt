@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.mercari.roadtripgames.R
@@ -14,6 +15,7 @@ import kotlinx.android.synthetic.main.activity_number_plate.*
 import nl.dionsegijn.konfetti.models.Shape
 import nl.dionsegijn.konfetti.models.Size
 import javax.inject.Inject
+
 
 class NumberPlateActivity  : AppCompatActivity() {
 
@@ -47,6 +49,12 @@ class NumberPlateActivity  : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
+    private fun clearSearchFocus() {
+        search.clearFocus()
+        (getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager)
+            .hideSoftInputFromWindow(search.windowToken, 0)
+    }
+
     private fun setupSearch() {
         search.setOnEditorActionListener { v, actionId, event ->
             return@setOnEditorActionListener when (actionId) {
@@ -57,10 +65,18 @@ class NumberPlateActivity  : AppCompatActivity() {
                 else -> false
             }
         }
+        search.setOnFocusChangeListener { v, hasFocus ->
+            if (!hasFocus) { clearSearchFocus() }
+        }
+        search_layout.setEndIconOnClickListener {
+            search.text?.clear()
+            clearSearch()
+        }
     }
 
     private fun setupRecyclerView() {
         numberPlateAdapter.setOnPlateFoundListener {
+            clearSearchFocus()
             viewModel.onPlateUpdated(it)
             if (it.isFound) {
                 onPlateFound()
@@ -84,6 +100,10 @@ class NumberPlateActivity  : AppCompatActivity() {
 
     private fun searchStates(text: String) {
         viewModel.filterPlates(text)
+    }
+
+    private fun clearSearch() {
+        viewModel.clearSearch()
     }
 
     private fun playAgain() {

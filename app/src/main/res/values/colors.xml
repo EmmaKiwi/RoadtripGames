@@ -6,6 +6,7 @@
     <color name="subtitle">#6D6D6D</color>
 
     <color name="theme_primary">#146666</color>
+    <color name="theme_primary_variant">#8be0e0</color>
     <color name="theme_secondary">#000000</color>
     <color name="theme_accent">#61122b</color>
 
@@ -14,4 +15,6 @@
 
     <color name="text_primary">#000000</color>
     <color name="text_on_dark_bg">#FFFFFF</color>
+
+    <color name="light_gray">#aaaaaa</color>
 </resources>

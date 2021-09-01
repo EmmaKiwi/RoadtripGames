@@ -70,39 +70,53 @@
         android:id="@+id/stay_logged_in"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/stay_logged_in"
-        android:textSize="@dimen/sm_text_size"
-        android:textColor="@color/text_primary"
-        android:buttonTint="@color/light_gray"
         android:layout_marginStart="@dimen/med_spacing"
-        app:layout_constraintTop_toBottomOf="@id/password"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:buttonTint="@color/light_gray"
+        android:text="@string/stay_logged_in"
+        android:textColor="@color/text_primary"
+        android:textSize="@dimen/sm_text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/password" />
 
     <Button
         android:id="@+id/login_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textColor="@color/text_on_dark_bg"
-        android:text="@string/login"
         android:layout_marginStart="@dimen/med_spacing"
         android:layout_marginTop="@dimen/med_spacing"
         android:layout_marginEnd="@dimen/med_spacing"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/login"
+        android:textColor="@color/text_on_dark_bg"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/stay_logged_in" />
+
+    <Button
+        android:id="@+id/skip_button"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/med_spacing"
+        android:background="@null"
+        android:backgroundTint="@color/bg_primary"
+        android:text="@string/skip"
+        android:textColor="@color/theme_primary_variant"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/login_button" />
 
     <Button
         android:id="@+id/signup_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textColor="@color/text_on_dark_bg"
-        android:text="@string/signup"
         android:layout_marginStart="@dimen/med_spacing"
         android:layout_marginTop="@dimen/med_spacing"
         android:layout_marginEnd="@dimen/med_spacing"
         android:backgroundTint="@color/theme_primary_variant"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/signup"
+        android:textColor="@color/text_on_dark_bg"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/login_button" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/skip_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -60,8 +60,10 @@ class LoginActivity: AppCompatActivity() {
             username.text.toString(),
             password.text.toString()
         ).observe(this, Observer { user ->
-            user?.let {
-                navigator.login(it)
+            if (user != null) {
+                navigator.login(user)
+            } else {
+                // display error
             }
         })
     }

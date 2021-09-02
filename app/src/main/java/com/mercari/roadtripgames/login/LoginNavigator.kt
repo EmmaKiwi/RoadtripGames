@@ -19,13 +19,16 @@ class LoginNavigator @Inject constructor(
 
     override fun signup() {
         val intent = Intent(activity, SignupActivity::class.java)
-        activity.startActivity(intent)
-        activity.finish()
+        activity.startActivityForResult(intent, SIGNUP_REQUEST_CODE)
     }
 
     override fun openHomeWithoutLogin() {
         val intent = Intent(activity, HomeActivity::class.java)
         activity.startActivity(intent)
         activity.finish()
+    }
+
+    companion object {
+        const val SIGNUP_REQUEST_CODE = 12000
     }
 }

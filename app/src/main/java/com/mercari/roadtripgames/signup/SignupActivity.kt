@@ -43,7 +43,7 @@ class SignupActivity : AppCompatActivity() {
 
     private fun setupUserListener() {
         viewModel.user.observe(this, Observer { user ->
-            navigator.
+            navigator.signup(user)
         })
     }
 

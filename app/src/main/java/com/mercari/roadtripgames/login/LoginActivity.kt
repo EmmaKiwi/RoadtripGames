@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.mercari.roadtripgames.R
-import com.mercari.roadtripgames.login.di.DaggerLoginComponent
+import com.mercari.roadtripgames.RoadTripApplication
 import kotlinx.android.synthetic.main.activity_login.*
 import javax.inject.Inject
 
@@ -26,7 +26,9 @@ class LoginActivity: AppCompatActivity() {
     }
 
     private fun setupDi() {
-        DaggerLoginComponent.builder()
+        (this.application as RoadTripApplication)
+            .appComponent
+            .newLoginComponent()
             .activity(this)
             .build()
             .inject(this)

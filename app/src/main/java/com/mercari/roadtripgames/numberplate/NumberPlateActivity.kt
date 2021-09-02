@@ -9,8 +9,7 @@ import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.mercari.roadtripgames.R
-import com.mercari.roadtripgames.numberplate.di.DaggerNumberPlateComponent
-import com.mercari.roadtripgames.numberplate.di.NumberPlateModule
+import com.mercari.roadtripgames.RoadTripApplication
 import kotlinx.android.synthetic.main.activity_number_plate.*
 import nl.dionsegijn.konfetti.models.Shape
 import nl.dionsegijn.konfetti.models.Size
@@ -26,8 +25,9 @@ class NumberPlateActivity  : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_number_plate)
 
-        DaggerNumberPlateComponent.builder()
-            .numberPlateModule(NumberPlateModule(this))
+        (this.application as RoadTripApplication)
+            .appComponent
+            .newNumberPlateComponent()
             .build()
             .inject(this)
 

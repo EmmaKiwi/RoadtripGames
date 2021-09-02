@@ -5,12 +5,13 @@ import com.mercari.roadtripgames.database.DatabaseModule
 import com.mercari.roadtripgames.login.LoginActivity
 import dagger.BindsInstance
 import dagger.Component
+import dagger.Subcomponent
 
-@Component(modules = [LoginModule::class, DatabaseModule::class])
+@Subcomponent(modules = [LoginModule::class])
 interface LoginComponent {
     fun inject(activity: LoginActivity)
 
-    @Component.Builder
+    @Subcomponent.Builder
     interface Builder {
 
         @BindsInstance

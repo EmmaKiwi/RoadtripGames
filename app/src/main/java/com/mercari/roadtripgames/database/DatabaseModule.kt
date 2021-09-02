@@ -1,5 +1,6 @@
 package com.mercari.roadtripgames.database
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
 import dagger.Module
@@ -9,9 +10,9 @@ import dagger.Provides
 class DatabaseModule {
 
     @Provides
-    fun providesDatabase(activity: AppCompatActivity): AppDatabase {
+    fun providesDatabase(context: Context): AppDatabase {
         return Room.databaseBuilder(
-            activity,
+            context,
             AppDatabase::class.java, "database-name"
         ).build()
     }

@@ -12,6 +12,11 @@
     <string name="username_error">Please enter your username</string>
     <string name="password_error">Please enter your password</string>
 
+    <!-- Signup -->
+    <string name="create_user">Create new user</string>
+    <string name="confirm_password">Please confirm your password</string>
+    <string name="enter_password">Please enter your password</string>
+
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>

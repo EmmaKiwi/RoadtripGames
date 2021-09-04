@@ -1,10 +1,13 @@
 package com.mercari.roadtripgames.login
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.mercari.roadtripgames.R
 import com.mercari.roadtripgames.RoadTripApplication
+import com.mercari.roadtripgames.utils.ToastProvider
 import kotlinx.android.synthetic.main.activity_login.*
 import javax.inject.Inject
 
@@ -16,6 +19,9 @@ class LoginActivity: AppCompatActivity() {
     @Inject
     lateinit var viewModel: LoginViewModel
 
+    @Inject
+    lateinit var toastProvider: ToastProvider
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -23,6 +29,16 @@ class LoginActivity: AppCompatActivity() {
         setupDi()
         setupOnClickListeners()
         setupValidation()
+        setupUserListener()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == LoginNavigator.SIGNUP_REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                viewModel.onSignupReturn()
+            }
+        }
     }
 
     private fun setupDi() {
@@ -45,6 +61,17 @@ class LoginActivity: AppCompatActivity() {
                 password.error = getString(R.string.password_error)
             }
         })
+        viewModel.userNotFoundError.observe(this, Observer { notFound ->
+            if (notFound) {
+                toastProvider.showToast("Username and password combination is invalid.")
+            }
+        })
+    }
+
+    private fun setupUserListener() {
+        viewModel.user.observe(this, Observer { user ->
+            navigator.login(user)
+        })
     }
 
     private fun setupOnClickListeners() {
@@ -58,15 +85,9 @@ class LoginActivity: AppCompatActivity() {
     }
 
     private fun login() {
-        viewModel.getUser(
+        viewModel.login(
             username.text.toString(),
             password.text.toString()
-        ).observe(this, Observer { user ->
-            if (user != null) {
-                navigator.login(user)
-            } else {
-                // display error
-            }
-        })
+        )
     }
 }

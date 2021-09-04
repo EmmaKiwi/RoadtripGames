@@ -1,6 +1,5 @@
 package com.mercari.roadtripgames.login
 
-import androidx.lifecycle.LiveData
 import com.mercari.roadtripgames.user.User
 
 interface LoginContract {
@@ -11,6 +10,6 @@ interface LoginContract {
     }
 
     interface Repository {
-        fun getUser(username: String, password: String): LiveData<User?>
+       suspend  fun getUser(username: String, password: String): User?
     }
 }

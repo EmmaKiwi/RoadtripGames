@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.mercari.roadtripgames.R
 import com.mercari.roadtripgames.RoadTripApplication
+import com.mercari.roadtripgames.utils.ToastProvider
 import kotlinx.android.synthetic.main.activity_number_plate.toolbar
 import kotlinx.android.synthetic.main.activity_signup.*
 import javax.inject.Inject
@@ -17,6 +18,9 @@ class SignupActivity : AppCompatActivity() {
 
     @Inject
     lateinit var navigator: SignupContract.Navigator
+
+    @Inject
+    lateinit var toastProvider: ToastProvider
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,6 +68,12 @@ class SignupActivity : AppCompatActivity() {
         viewModel.passwordValidation.observe(this, Observer { errorMessage ->
             password.error = errorMessage
             confirm_password.error = errorMessage
+        })
+        viewModel.existingUserError.observe(this, Observer { exists ->
+            if (exists) {
+                toastProvider.showToast("This username already exists")
+                username.error = "This username already exists"
+            }
         })
     }
 

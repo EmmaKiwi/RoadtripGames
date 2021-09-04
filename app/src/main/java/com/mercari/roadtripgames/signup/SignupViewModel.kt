@@ -4,17 +4,20 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mercari.roadtripgames.auth.Auth
+import com.mercari.roadtripgames.user.PasswordManager
 import com.mercari.roadtripgames.user.User
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class SignupViewModel @Inject constructor(
     private val repository: SignupContract.Repository,
-    private val auth: Auth
+    private val auth: Auth,
+    private val passwordManager: PasswordManager
 ) : ViewModel() {
 
     val usernameValidation = MutableLiveData<String>()
     val passwordValidation = MutableLiveData<String>()
+    val existingUserError = MutableLiveData<Boolean>()
 
     val user = MutableLiveData<User>()
 
@@ -35,10 +38,15 @@ class SignupViewModel @Inject constructor(
             }
             else -> {
                 viewModelScope.launch {
-                    val newUser = User(username = username, password = password)
-                    val id = repository.createUser(newUser)
-                    auth.setUser(newUser)
-                    user.postValue(newUser.copy(id = id))
+                    if (repository.getUserByName(username) != null) {
+                        existingUserError.postValue(true)
+                    } else {
+                        val passwordHash = passwordManager.getPasswordHash(password)
+                        val newUser = User(username = username, password = passwordHash)
+                        val id = repository.createUser(newUser)
+                        auth.setUser(newUser)
+                        user.postValue(newUser.copy(id = id))
+                    }
                 }
             }
         }

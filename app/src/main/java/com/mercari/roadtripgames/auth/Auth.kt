@@ -1,6 +1,7 @@
 package com.mercari.roadtripgames.auth
 
 import com.mercari.roadtripgames.user.User
+import dagger.Reusable
 import javax.inject.Inject
 
 interface Auth {
@@ -8,6 +9,7 @@ interface Auth {
     fun getUser(): User?
 }
 
+@Reusable
 class AuthImpl @Inject constructor() : Auth {
 
     private var user: User? = null

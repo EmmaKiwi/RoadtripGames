@@ -7,6 +7,6 @@ class LoginRepository @Inject constructor(
     private val database: AppDatabase
 ) : LoginContract.Repository {
 
-    override fun getUser(username: String, password: String) =
+    override suspend fun getUser(username: String, password: String) =
         database.userDao().getUser(username, password)
 }

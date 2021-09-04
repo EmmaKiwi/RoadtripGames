@@ -13,8 +13,12 @@ interface UserDao {
     fun getUserById(id: String): LiveData<User>
 
     @Query("SELECT * from user WHERE username = :username AND password = :passwordHash")
-    fun getUser(username: String, passwordHash: String): LiveData<User?>
+    suspend fun getUser(username: String, passwordHash: String): User?
 
-    @Insert(onConflict = OnConflictStrategy.ABORT)
+    @Query("SELECT * from user WHERE username = :username")
+    suspend fun getUserByName(username: String): User?
+
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addUser(user: User): Long
 }

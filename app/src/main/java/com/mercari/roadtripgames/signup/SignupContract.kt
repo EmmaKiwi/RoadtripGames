@@ -6,6 +6,7 @@ interface SignupContract {
 
     interface Repository {
         suspend fun createUser(user: User): Long
+        suspend fun getUserByName(username: String): User?
     }
 
     interface Navigator {

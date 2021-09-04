@@ -1,4 +1,4 @@
-package com.mercari.roadtripgames.signup
+package com.mercari.roadtripgames.login.signup
 
 import android.os.Bundle
 import android.view.MenuItem

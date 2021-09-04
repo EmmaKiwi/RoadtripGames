@@ -1,8 +1,8 @@
-package com.mercari.roadtripgames.signup.di
+package com.mercari.roadtripgames.login.signup.di
 
-import com.mercari.roadtripgames.signup.SignupContract
-import com.mercari.roadtripgames.signup.SignupNavigator
-import com.mercari.roadtripgames.signup.SignupRepository
+import com.mercari.roadtripgames.login.signup.SignupContract
+import com.mercari.roadtripgames.login.signup.SignupNavigator
+import com.mercari.roadtripgames.login.signup.SignupRepository
 import dagger.Binds
 import dagger.Module
 

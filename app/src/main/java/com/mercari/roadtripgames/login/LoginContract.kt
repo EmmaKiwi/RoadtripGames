@@ -1,6 +1,6 @@
 package com.mercari.roadtripgames.login
 
-import com.mercari.roadtripgames.user.User
+import com.mercari.roadtripgames.auth.user.User
 
 interface LoginContract {
     interface Navigator {

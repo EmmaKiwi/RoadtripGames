@@ -3,8 +3,8 @@ package com.mercari.roadtripgames.login
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import com.mercari.roadtripgames.home.HomeActivity
-import com.mercari.roadtripgames.signup.SignupActivity
-import com.mercari.roadtripgames.user.User
+import com.mercari.roadtripgames.login.signup.SignupActivity
+import com.mercari.roadtripgames.auth.user.User
 import javax.inject.Inject
 
 class LoginNavigator @Inject constructor(

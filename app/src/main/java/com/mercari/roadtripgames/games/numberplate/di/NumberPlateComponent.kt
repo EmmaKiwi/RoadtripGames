@@ -1,7 +1,7 @@
-package com.mercari.roadtripgames.numberplate.di
+package com.mercari.roadtripgames.games.numberplate.di
 
 import android.content.Context
-import com.mercari.roadtripgames.numberplate.NumberPlateActivity
+import com.mercari.roadtripgames.games.numberplate.NumberPlateActivity
 import dagger.BindsInstance
 import dagger.Subcomponent
 

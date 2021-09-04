@@ -1,6 +1,6 @@
-package com.mercari.roadtripgames.signup
+package com.mercari.roadtripgames.login.signup
 
-import com.mercari.roadtripgames.user.User
+import com.mercari.roadtripgames.auth.user.User
 
 interface SignupContract {
 

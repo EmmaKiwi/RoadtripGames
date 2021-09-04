@@ -1,12 +1,11 @@
 package com.mercari.roadtripgames.login
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mercari.roadtripgames.auth.Auth
-import com.mercari.roadtripgames.user.PasswordManager
-import com.mercari.roadtripgames.user.User
+import com.mercari.roadtripgames.auth.user.PasswordManager
+import com.mercari.roadtripgames.auth.user.User
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

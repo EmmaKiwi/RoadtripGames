@@ -1,4 +1,4 @@
-package com.mercari.roadtripgames.numberplate.di
+package com.mercari.roadtripgames.games.numberplate.di
 
 import dagger.Module
 

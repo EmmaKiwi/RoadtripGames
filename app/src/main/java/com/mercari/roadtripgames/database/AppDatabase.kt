@@ -3,11 +3,11 @@ package com.mercari.roadtripgames.database
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.mercari.roadtripgames.numberplate.NumberPlate
-import com.mercari.roadtripgames.numberplate.NumberPlateConverter
-import com.mercari.roadtripgames.numberplate.NumberPlateDao
-import com.mercari.roadtripgames.user.User
-import com.mercari.roadtripgames.user.UserDao
+import com.mercari.roadtripgames.games.numberplate.NumberPlate
+import com.mercari.roadtripgames.games.numberplate.NumberPlateConverter
+import com.mercari.roadtripgames.games.numberplate.NumberPlateDao
+import com.mercari.roadtripgames.auth.user.User
+import com.mercari.roadtripgames.auth.user.UserDao
 
 @Database(entities = [NumberPlate::class, User::class], version = 1)
 @TypeConverters(NumberPlateConverter::class)

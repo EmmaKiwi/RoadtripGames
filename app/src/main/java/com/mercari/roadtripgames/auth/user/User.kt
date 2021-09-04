@@ -1,4 +1,4 @@
-package com.mercari.roadtripgames.user
+package com.mercari.roadtripgames.auth.user
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

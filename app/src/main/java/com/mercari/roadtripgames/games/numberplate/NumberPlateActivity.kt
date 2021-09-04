@@ -1,4 +1,4 @@
-package com.mercari.roadtripgames.numberplate
+package com.mercari.roadtripgames.games.numberplate
 
 import android.graphics.Color
 import android.os.Bundle

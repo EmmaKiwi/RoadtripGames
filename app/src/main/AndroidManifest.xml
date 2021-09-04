@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".signup.SignupActivity"
+            android:name="com.mercari.roadtripgames.login.signup.SignupActivity"
             android:theme="@style/Theme.RoadtripGames.NoActionBar"/>
         <activity
             android:name=".home.HomeActivity"
@@ -29,7 +29,7 @@
             android:theme="@style/Theme.RoadtripGames.NoActionBar">
         </activity>
         <activity
-            android:name=".numberplate.NumberPlateActivity"
+            android:name="com.mercari.roadtripgames.games.numberplate.NumberPlateActivity"
             android:theme="@style/Theme.RoadtripGames.NoActionBar" />
     </application>
 

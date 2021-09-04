@@ -1,6 +1,6 @@
 package com.mercari.roadtripgames.auth
 
-import com.mercari.roadtripgames.user.User
+import com.mercari.roadtripgames.auth.user.User
 import dagger.Reusable
 import javax.inject.Inject
 

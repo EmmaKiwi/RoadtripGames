@@ -1,7 +1,7 @@
-package com.mercari.roadtripgames.signup
+package com.mercari.roadtripgames.login.signup
 
 import com.mercari.roadtripgames.database.AppDatabase
-import com.mercari.roadtripgames.user.User
+import com.mercari.roadtripgames.auth.user.User
 import javax.inject.Inject
 
 class SignupRepository @Inject constructor(

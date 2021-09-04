@@ -1,4 +1,4 @@
-package com.mercari.roadtripgames.numberplate
+package com.mercari.roadtripgames.games.numberplate
 
 import com.mercari.roadtripgames.database.AppDatabase
 import javax.inject.Inject

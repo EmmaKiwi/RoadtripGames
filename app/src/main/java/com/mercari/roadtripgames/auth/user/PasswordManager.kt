@@ -1,4 +1,4 @@
-package com.mercari.roadtripgames.user
+package com.mercari.roadtripgames.auth.user
 
 import java.nio.charset.StandardCharsets.UTF_8
 import java.security.MessageDigest

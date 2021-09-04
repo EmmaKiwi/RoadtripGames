@@ -1,7 +1,7 @@
-package com.mercari.roadtripgames.signup.di
+package com.mercari.roadtripgames.login.signup.di
 
 import androidx.appcompat.app.AppCompatActivity
-import com.mercari.roadtripgames.signup.SignupActivity
+import com.mercari.roadtripgames.login.signup.SignupActivity
 import dagger.BindsInstance
 import dagger.Subcomponent
 

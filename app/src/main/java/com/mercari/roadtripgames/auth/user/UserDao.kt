@@ -10,7 +10,7 @@ import androidx.room.Query
 interface UserDao {
 
     @Query("SELECT * from user WHERE id = :id")
-    fun getUserById(id: String): LiveData<User>
+    suspend fun getUserById(id: Long): User?
 
     @Query("SELECT * from user WHERE username = :username AND password = :passwordHash")
     suspend fun getUser(username: String, passwordHash: String): User?

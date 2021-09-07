@@ -3,14 +3,14 @@ package com.mercari.roadtripgames.home.di
 import androidx.appcompat.app.AppCompatActivity
 import com.mercari.roadtripgames.home.HomeActivity
 import dagger.BindsInstance
-import dagger.Component
+import dagger.Subcomponent
 
-@Component(modules = [HomeModule::class])
+@Subcomponent(modules = [HomeModule::class])
 interface HomeComponent {
 
     fun inject(activity: HomeActivity)
 
-    @Component.Builder
+    @Subcomponent.Builder
     interface Builder {
         fun build(): HomeComponent
 

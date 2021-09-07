@@ -11,7 +11,7 @@ class LoginNavigator @Inject constructor(
     private val activity: AppCompatActivity
 ) : LoginContract.Navigator {
 
-    override fun login(user: User) {
+    override fun login() {
         val intent = Intent(activity, HomeActivity::class.java)
         activity.startActivity(intent)
         activity.finish()

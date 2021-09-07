@@ -1,11 +1,10 @@
 package com.mercari.roadtripgames.home
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import com.mercari.roadtripgames.R
-import com.mercari.roadtripgames.home.di.DaggerHomeComponent
+import com.mercari.roadtripgames.RoadTripApplication
 import kotlinx.android.synthetic.main.activity_home.*
 import javax.inject.Inject
 
@@ -14,18 +13,29 @@ class HomeActivity : AppCompatActivity() {
     @Inject
     lateinit var navigator: HomeNavigator
 
+    @Inject
+    lateinit var viewModel: HomeViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        setSupportActionBar(findViewById(R.id.toolbar))
 
-        DaggerHomeComponent
-            .builder()
+        (this.application as RoadTripApplication)
+            .appComponent
+            .newHomeComponent()
             .activity(this)
             .build()
             .inject(this)
 
+        setupToolbar()
+        observeUser()
         setupListeners()
+    }
+
+    private fun setupToolbar() {
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     private fun setupListeners() {
@@ -34,19 +44,18 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
+    private fun observeUser() {
+        viewModel.user.observe(this, Observer { user ->
+            showTitle("${user.username}'s games")
+        })
+        viewModel.isGuest.observe(this, Observer { isGuest ->
+            if (isGuest) {
+                showTitle("All games")
+            }
+        })
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
-        }
+    private fun showTitle(title: String) {
+        supportActionBar?.title = title
     }
 }

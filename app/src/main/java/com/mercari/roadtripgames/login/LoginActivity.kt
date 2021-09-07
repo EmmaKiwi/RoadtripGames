@@ -9,6 +9,7 @@ import com.mercari.roadtripgames.R
 import com.mercari.roadtripgames.RoadTripApplication
 import com.mercari.roadtripgames.utils.ToastProvider
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_number_plate.*
 import javax.inject.Inject
 
 class LoginActivity: AppCompatActivity() {
@@ -69,8 +70,8 @@ class LoginActivity: AppCompatActivity() {
     }
 
     private fun setupUserListener() {
-        viewModel.user.observe(this, Observer { user ->
-            navigator.login(user)
+        viewModel.user.observe(this, Observer {
+            navigator.login()
         })
     }
 
@@ -81,6 +82,9 @@ class LoginActivity: AppCompatActivity() {
         }
         signup_button.setOnClickListener {
             navigator.signup()
+        }
+        stay_logged_in.setOnCheckedChangeListener { buttonView, isChecked ->
+            viewModel.onStayLoggedInChecked(isChecked)
         }
     }
 

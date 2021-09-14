@@ -7,7 +7,6 @@ import androidx.lifecycle.Observer
 import com.mercari.roadtripgames.R
 import com.mercari.roadtripgames.RoadTripApplication
 import com.mercari.roadtripgames.utils.ToastProvider
-import kotlinx.android.synthetic.main.activity_number_plate.toolbar
 import kotlinx.android.synthetic.main.activity_signup.*
 import javax.inject.Inject
 

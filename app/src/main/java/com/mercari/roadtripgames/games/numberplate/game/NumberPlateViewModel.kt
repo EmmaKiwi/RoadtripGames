@@ -1,11 +1,15 @@
-package com.mercari.roadtripgames.games.numberplate
+package com.mercari.roadtripgames.games.numberplate.game
 
 import androidx.lifecycle.*
+import com.mercari.roadtripgames.games.numberplate.NumberPlate
+import com.mercari.roadtripgames.games.numberplate.NumberPlateContract
+import com.mercari.roadtripgames.games.numberplate.NumberPlateRepository
+import com.mercari.roadtripgames.games.numberplate.NumberPlateType
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class NumberPlateViewModel @Inject constructor(
-    private val repository: NumberPlateRepository
+    private val repository: NumberPlateContract.Repository
 ) : ViewModel() {
 
     private var filterString = MutableLiveData<String?>()

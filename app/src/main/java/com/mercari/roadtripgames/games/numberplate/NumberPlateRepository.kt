@@ -3,14 +3,16 @@ package com.mercari.roadtripgames.games.numberplate
 import com.mercari.roadtripgames.database.AppDatabase
 import javax.inject.Inject
 
-class NumberPlateRepository @Inject constructor(private val database: AppDatabase) {
+class NumberPlateRepository @Inject constructor(
+    private val database: AppDatabase
+): NumberPlateContract.Repository {
 
-    fun getNumberPlates() = database.numberPlateDao().getAll()
+    override fun getNumberPlates() = database.numberPlateDao().getAll()
 
-    suspend fun insertNumberPlates(numberPlates: List<NumberPlate>) =
+    override suspend fun insertNumberPlates(numberPlates: List<NumberPlate>) =
         database.numberPlateDao().insertAll(numberPlates)
 
-    suspend fun updatePlate(plate: NumberPlate) = database.numberPlateDao().update(plate)
+    override suspend fun updatePlate(plate: NumberPlate) = database.numberPlateDao().update(plate)
 
-    suspend fun resetAllPlates(plates: List<NumberPlate>) = database.numberPlateDao().updateAll(plates)
+    override suspend fun resetAllPlates(plates: List<NumberPlate>) = database.numberPlateDao().updateAll(plates)
 }

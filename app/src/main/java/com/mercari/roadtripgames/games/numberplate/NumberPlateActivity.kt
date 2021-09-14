@@ -1,25 +1,16 @@
 package com.mercari.roadtripgames.games.numberplate
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.View
-import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import com.mercari.roadtripgames.R
 import com.mercari.roadtripgames.RoadTripApplication
-import kotlinx.android.synthetic.main.activity_number_plate.*
-import nl.dionsegijn.konfetti.models.Shape
-import nl.dionsegijn.konfetti.models.Size
 import javax.inject.Inject
 
 
 class NumberPlateActivity  : AppCompatActivity() {
 
-    @Inject lateinit var viewModel: NumberPlateViewModel
-    private val numberPlateAdapter = NumberPlateAdapter()
+    @Inject lateinit var navigator: NumberPlateContract.Navigator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,12 +19,11 @@ class NumberPlateActivity  : AppCompatActivity() {
         (this.application as RoadTripApplication)
             .appComponent
             .newNumberPlateComponent()
+            .activity(this)
             .build()
             .inject(this)
 
-        setupToolbar()
-        setupSearch()
-        setupRecyclerView()
+        navigator.showHomeFragment()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -41,104 +31,5 @@ class NumberPlateActivity  : AppCompatActivity() {
             android.R.id.home -> finish()
         }
         return true
-    }
-
-    private fun setupToolbar() {
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayShowTitleEnabled(false)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-    }
-
-    private fun clearSearchFocus() {
-        search.clearFocus()
-        (getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager)
-            .hideSoftInputFromWindow(search.windowToken, 0)
-    }
-
-    private fun setupSearch() {
-        search.setOnEditorActionListener { v, actionId, event ->
-            return@setOnEditorActionListener when (actionId) {
-                EditorInfo.IME_ACTION_SEARCH -> {
-                    searchStates(v.text.toString())
-                    true
-                }
-                else -> false
-            }
-        }
-        search.setOnFocusChangeListener { v, hasFocus ->
-            if (!hasFocus) { clearSearchFocus() }
-        }
-        search_layout.setEndIconOnClickListener {
-            search.text?.clear()
-            clearSearch()
-        }
-    }
-
-    private fun setupRecyclerView() {
-        numberPlateAdapter.setOnPlateFoundListener {
-            clearSearchFocus()
-            viewModel.onPlateUpdated(it)
-            if (it.isFound) {
-                onPlateFound()
-            }
-        }
-        number_plate_list.apply {
-            adapter = numberPlateAdapter
-        }
-        viewModel.numberPlates.observe(this, Observer {
-            numberPlateAdapter.submitList(it)
-        })
-        viewModel.isAllPlatesFound.observe(this, Observer { gameComplete ->
-            if (gameComplete) {
-                complete_layout.visibility = View.VISIBLE
-                play_again_button.setOnClickListener {
-                    playAgain()
-                }
-            }
-        })
-    }
-
-    private fun searchStates(text: String) {
-        viewModel.filterPlates(text)
-    }
-
-    private fun clearSearch() {
-        viewModel.clearSearch()
-    }
-
-    private fun playAgain() {
-        complete_layout.visibility = View.GONE
-        viewModel.resetPlates()
-    }
-
-    private fun onPlateFound() {
-        showConfetti()
-        animateMessage()
-    }
-
-    private fun animateMessage() {
-        congratulations_layout.apply {
-            visibility = View.VISIBLE
-            postDelayed({
-                visibility = View.GONE
-            }, 1000)
-        }
-    }
-
-    private fun showConfetti() {
-        viewKonfetti.build()
-            .addColors(Color.YELLOW, Color.GREEN, Color.MAGENTA)
-            .setDirection(0.0, 359.0)
-            .setSpeed(1f, 5f)
-            .setFadeOutEnabled(true)
-            .setTimeToLive(2000L)
-            .addShapes(Shape.Square, Shape.Circle)
-            .addSizes(Size(12))
-            .setPosition(
-                (viewKonfetti.width / 2).toFloat(),
-                (viewKonfetti.width / 2).toFloat(),
-                (viewKonfetti.height / 2).toFloat(),
-                (viewKonfetti.height / 2).toFloat())
-            .burst(3000)
     }
 }

@@ -55,6 +55,7 @@ class NumberPlateHomeFragment: Fragment(R.layout.fragment_number_plate_home) {
                 }
             }
             setNavigationIcon(R.drawable.outline_arrow_back_white_24)
+            setNavigationOnClickListener { navigator.back() }
             setTitle(R.string.number_plate_title)
         }
     }

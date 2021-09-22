@@ -19,6 +19,15 @@ class NumberPlateNavigator @Inject constructor(
     override fun showGameFragment() {
         activity.supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, NumberPlateGameFragment.getInstance(), "Game")
+            .addToBackStack("Game")
             .commit()
+    }
+
+    override fun back() {
+        if (activity.supportFragmentManager.backStackEntryCount > 0) {
+            activity.supportFragmentManager.popBackStack()
+        } else {
+            activity.finish()
+        }
     }
 }

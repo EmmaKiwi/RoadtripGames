@@ -8,6 +8,7 @@ interface NumberPlateContract {
     interface Navigator {
         fun showHomeFragment()
         fun showGameFragment()
+        fun back()
     }
 
     interface GameRepository {

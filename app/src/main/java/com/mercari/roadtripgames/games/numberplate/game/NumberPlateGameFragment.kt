@@ -7,11 +7,13 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.mercari.roadtripgames.R
 import com.mercari.roadtripgames.RoadTripApplication
 import com.mercari.roadtripgames.games.numberplate.NumberPlateAdapter
+import com.mercari.roadtripgames.games.numberplate.NumberPlateContract
 import kotlinx.android.synthetic.main.fragment_number_plate_game.*
 import nl.dionsegijn.konfetti.models.Shape
 import nl.dionsegijn.konfetti.models.Size
@@ -21,6 +23,10 @@ class NumberPlateGameFragment: Fragment(R.layout.fragment_number_plate_game) {
 
     @Inject
     lateinit var gameViewModel: NumberPlateGameViewModel
+
+    @Inject
+    lateinit var navigator: NumberPlateContract.Navigator
+
     private val numberPlateAdapter = NumberPlateAdapter()
 
     override fun onAttach(context: Context) {
@@ -122,10 +128,19 @@ class NumberPlateGameFragment: Fragment(R.layout.fragment_number_plate_game) {
     }
 
     private fun setupToolbar() {
-        (requireActivity() as AppCompatActivity).run {
-            setSupportActionBar(toolbar)
-            supportActionBar?.setDisplayShowTitleEnabled(false)
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        requireView().findViewById<Toolbar>(R.id.toolbar).apply {
+            inflateMenu(R.menu.menu_number_plate_home)
+            setOnMenuItemClickListener { item ->
+                when (item.itemId) {
+                    R.id.new_game -> {
+                        true
+                    }
+                    else -> false
+                }
+            }
+            setNavigationIcon(R.drawable.outline_arrow_back_white_24)
+            setNavigationOnClickListener { navigator.back() }
+            setTitle(R.string.number_plate_title)
         }
     }
 

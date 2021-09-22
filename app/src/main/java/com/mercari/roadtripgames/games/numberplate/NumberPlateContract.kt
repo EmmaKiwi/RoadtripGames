@@ -7,12 +7,12 @@ import com.mercari.roadtripgames.games.numberplate.model.NumberPlateGame
 interface NumberPlateContract {
     interface Navigator {
         fun showHomeFragment()
-        fun showGameFragment()
+        fun showGameFragment(gameId: String)
         fun back()
     }
 
     interface GameRepository {
-        fun getNumberPlates(): LiveData<List<NumberPlate>>
+        fun getNumberPlates(gameId: String): LiveData<List<NumberPlate>>
         suspend fun insertNumberPlates(numberPlates: List<NumberPlate>)
         suspend fun updatePlate(plate: NumberPlate)
         suspend fun resetAllPlates(plates: List<NumberPlate>)

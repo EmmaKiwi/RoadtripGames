@@ -9,7 +9,7 @@ class NumberPlateGameRepository @Inject constructor(
     private val database: AppDatabase
 ): NumberPlateContract.GameRepository {
 
-    override fun getNumberPlates() = database.numberPlateDao().getAll()
+    override fun getNumberPlates(gameId: String) = database.numberPlateDao().getByGameId(gameId)
 
     override suspend fun insertNumberPlates(numberPlates: List<NumberPlate>) =
         database.numberPlateDao().insertAll(numberPlates)

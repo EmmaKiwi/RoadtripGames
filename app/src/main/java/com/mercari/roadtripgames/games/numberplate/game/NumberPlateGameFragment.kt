@@ -31,11 +31,13 @@ class NumberPlateGameFragment: Fragment(R.layout.fragment_number_plate_game) {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
+        val gameId = arguments?.getString(EXTRA_GAME_ID) ?: ""
 
         (requireActivity().application as RoadTripApplication)
             .appComponent
             .newNumberPlateGameComponent()
             .activity(requireActivity() as AppCompatActivity)
+            .gameId(gameId)
             .build()
             .inject(this)
     }
@@ -161,6 +163,10 @@ class NumberPlateGameFragment: Fragment(R.layout.fragment_number_plate_game) {
     }
 
     companion object {
-        fun getInstance() = NumberPlateGameFragment()
+        private const val EXTRA_GAME_ID = "extra_game_id"
+
+        fun getInstance(gameId: String) = NumberPlateGameFragment().apply {
+            arguments?.putString(EXTRA_GAME_ID, gameId)
+        }
     }
 }

@@ -4,16 +4,18 @@ import androidx.lifecycle.*
 import com.mercari.roadtripgames.games.numberplate.model.NumberPlate
 import com.mercari.roadtripgames.games.numberplate.NumberPlateContract
 import com.mercari.roadtripgames.games.numberplate.NumberPlateType
+import com.mercari.roadtripgames.games.numberplate.game.di.NumberPlateGameComponent
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class NumberPlateGameViewModel @Inject constructor(
-    private val repository: NumberPlateContract.GameRepository
+    private val repository: NumberPlateContract.GameRepository,
+    @NumberPlateGameComponent.GameId private val gameId: String
 ) : ViewModel() {
 
     private var filterString = MutableLiveData<String?>()
     private val allNumberPlates = MediatorLiveData<List<NumberPlate>>().apply {
-        addSource(repository.getNumberPlates()) { plates ->
+        addSource(repository.getNumberPlates(gameId)) { plates ->
             value = if (plates.isEmpty()) {
                 val generatedPlates = generatePlates()
                 insertNewPlates(generatedPlates)

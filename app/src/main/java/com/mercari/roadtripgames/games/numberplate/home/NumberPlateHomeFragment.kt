@@ -62,7 +62,6 @@ class NumberPlateHomeFragment: Fragment(R.layout.fragment_number_plate_home) {
 
     private fun createNewGame() {
         viewModel.addNewGame()
-        navigator.showGameFragment()
     }
 
     companion object {

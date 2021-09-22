@@ -7,8 +7,8 @@ import com.mercari.roadtripgames.games.numberplate.model.NumberPlate
 @Dao
 interface NumberPlateDao {
 
-    @Query("SELECT * from numberplate")
-    fun getAll(): LiveData<List<NumberPlate>>
+    @Query("SELECT * from numberplate where gameId = :gameId")
+    fun getByGameId(gameId: String): LiveData<List<NumberPlate>>
 
     @Insert()
     suspend fun insertAll(numberPlates: List<NumberPlate>)

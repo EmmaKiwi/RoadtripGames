@@ -10,7 +10,8 @@ import javax.inject.Inject
 
 class NumberPlateHomeViewModel @Inject constructor(
     private val auth: Auth,
-    private val repository: NumberPlateContract.HomeRepository
+    private val repository: NumberPlateContract.HomeRepository,
+    private val navigator: NumberPlateContract.Navigator
 ): ViewModel() {
     private val allGames = auth.getUser()?.let {
         repository.getAllGames(it.id)
@@ -21,6 +22,7 @@ class NumberPlateHomeViewModel @Inject constructor(
         val newGame = NumberPlateGame(getNewGameId(), userId)
         viewModelScope.launch {
             repository.addNewGame(newGame)
+            navigator.showGameFragment(newGame.gameId)
         }
     }
 

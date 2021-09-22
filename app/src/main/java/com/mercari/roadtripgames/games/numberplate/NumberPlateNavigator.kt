@@ -16,9 +16,9 @@ class NumberPlateNavigator @Inject constructor(
             .commit()
     }
 
-    override fun showGameFragment() {
+    override fun showGameFragment(gameId: String) {
         activity.supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, NumberPlateGameFragment.getInstance(), "Game")
+            .replace(R.id.fragment_container, NumberPlateGameFragment.getInstance(gameId), "Game")
             .addToBackStack("Game")
             .commit()
     }

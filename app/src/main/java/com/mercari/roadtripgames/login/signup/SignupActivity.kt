@@ -1,13 +1,20 @@
 package com.mercari.roadtripgames.login.signup
 
+import android.content.Context
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.mercari.roadtripgames.R
 import com.mercari.roadtripgames.RoadTripApplication
 import com.mercari.roadtripgames.utils.ToastProvider
-import kotlinx.android.synthetic.main.activity_signup.*
+import kotlinx.android.synthetic.main.activity_signup.background
+import kotlinx.android.synthetic.main.activity_signup.confirm_password
+import kotlinx.android.synthetic.main.activity_signup.create_user_button
+import kotlinx.android.synthetic.main.activity_signup.password
+import kotlinx.android.synthetic.main.activity_signup.toolbar
+import kotlinx.android.synthetic.main.activity_signup.username
 import javax.inject.Inject
 
 class SignupActivity : AppCompatActivity() {
@@ -57,6 +64,10 @@ class SignupActivity : AppCompatActivity() {
                 password.text.toString(),
                 confirm_password.text.toString()
             )
+        }
+        background.setOnClickListener {
+            (getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
+                .hideSoftInputFromWindow(it.windowToken, 0)
         }
     }
 

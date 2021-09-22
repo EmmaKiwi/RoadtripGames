@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mercari.roadtripgames.R
+import com.mercari.roadtripgames.games.numberplate.model.NumberPlate
 import kotlinx.android.synthetic.main.layout_number_plate.view.*
 
 class NumberPlateAdapter: ListAdapter<NumberPlate, NumberPlateAdapter.ViewHolder>(NumberPlateDiffCallback()) {

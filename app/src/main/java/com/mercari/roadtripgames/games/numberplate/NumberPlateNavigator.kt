@@ -2,6 +2,7 @@ package com.mercari.roadtripgames.games.numberplate
 
 import androidx.appcompat.app.AppCompatActivity
 import com.mercari.roadtripgames.R
+import com.mercari.roadtripgames.games.numberplate.game.NumberPlateGameFragment
 import com.mercari.roadtripgames.games.numberplate.home.NumberPlateHomeFragment
 import javax.inject.Inject
 
@@ -16,6 +17,8 @@ class NumberPlateNavigator @Inject constructor(
     }
 
     override fun showGameFragment() {
-        TODO("Not yet implemented")
+        activity.supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, NumberPlateGameFragment.getInstance(), "Game")
+            .commit()
     }
 }

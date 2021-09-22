@@ -1,7 +1,8 @@
-package com.mercari.roadtripgames.games.numberplate
+package com.mercari.roadtripgames.games.numberplate.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.mercari.roadtripgames.games.numberplate.model.NumberPlate
 
 @Dao
 interface NumberPlateDao {

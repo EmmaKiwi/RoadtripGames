@@ -1,11 +1,13 @@
-package com.mercari.roadtripgames.games.numberplate
+package com.mercari.roadtripgames.games.numberplate.game
 
 import com.mercari.roadtripgames.database.AppDatabase
+import com.mercari.roadtripgames.games.numberplate.NumberPlateContract
+import com.mercari.roadtripgames.games.numberplate.model.NumberPlate
 import javax.inject.Inject
 
-class NumberPlateRepository @Inject constructor(
+class NumberPlateGameRepository @Inject constructor(
     private val database: AppDatabase
-): NumberPlateContract.Repository {
+): NumberPlateContract.GameRepository {
 
     override fun getNumberPlates() = database.numberPlateDao().getAll()
 

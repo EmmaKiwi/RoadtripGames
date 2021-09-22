@@ -7,6 +7,7 @@ import com.mercari.roadtripgames.database.DatabaseModule
 import com.mercari.roadtripgames.login.di.LoginComponent
 import com.mercari.roadtripgames.games.numberplate.di.NumberPlateComponent
 import com.mercari.roadtripgames.games.numberplate.game.di.NumberPlateGameComponent
+import com.mercari.roadtripgames.games.numberplate.home.di.NumberPlateHomeComponent
 import com.mercari.roadtripgames.home.di.HomeComponent
 import com.mercari.roadtripgames.login.signup.di.SignupComponent
 import dagger.BindsInstance
@@ -22,6 +23,7 @@ interface AppComponent {
     fun newHomeComponent(): HomeComponent.Builder
     fun newNumberPlateComponent(): NumberPlateComponent.Builder
     fun newNumberPlateGameComponent(): NumberPlateGameComponent.Builder
+    fun newNumberPlateHomeComponent(): NumberPlateHomeComponent.Builder
 
     @Component.Builder
     interface Builder {

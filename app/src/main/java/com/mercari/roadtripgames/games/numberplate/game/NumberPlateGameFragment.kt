@@ -2,6 +2,7 @@ package com.mercari.roadtripgames.games.numberplate.game
 
 import android.content.Context
 import android.graphics.Color
+import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
@@ -16,10 +17,10 @@ import nl.dionsegijn.konfetti.models.Shape
 import nl.dionsegijn.konfetti.models.Size
 import javax.inject.Inject
 
-class NumberPlateGameFragment(): Fragment(R.layout.fragment_number_plate_game) {
+class NumberPlateGameFragment: Fragment(R.layout.fragment_number_plate_game) {
 
     @Inject
-    lateinit var viewModel: NumberPlateViewModel
+    lateinit var gameViewModel: NumberPlateGameViewModel
     private val numberPlateAdapter = NumberPlateAdapter()
 
     override fun onAttach(context: Context) {
@@ -28,8 +29,13 @@ class NumberPlateGameFragment(): Fragment(R.layout.fragment_number_plate_game) {
         (requireActivity().application as RoadTripApplication)
             .appComponent
             .newNumberPlateGameComponent()
+            .activity(requireActivity() as AppCompatActivity)
             .build()
             .inject(this)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         setupToolbar()
         setupSearch()
@@ -58,7 +64,7 @@ class NumberPlateGameFragment(): Fragment(R.layout.fragment_number_plate_game) {
     private fun setupRecyclerView() {
         numberPlateAdapter.setOnPlateFoundListener {
             clearSearchFocus()
-            viewModel.onPlateUpdated(it)
+            gameViewModel.onPlateUpdated(it)
             if (it.isFound) {
                 onPlateFound()
             }
@@ -66,10 +72,10 @@ class NumberPlateGameFragment(): Fragment(R.layout.fragment_number_plate_game) {
         number_plate_list.apply {
             adapter = numberPlateAdapter
         }
-        viewModel.numberPlates.observe(this, Observer {
+        gameViewModel.numberPlates.observe(viewLifecycleOwner, Observer {
             numberPlateAdapter.submitList(it)
         })
-        viewModel.isAllPlatesFound.observe(this, Observer { gameComplete ->
+        gameViewModel.isAllPlatesFound.observe(viewLifecycleOwner, Observer { gameComplete ->
             if (gameComplete) {
                 complete_layout.visibility = View.VISIBLE
                 play_again_button.setOnClickListener {
@@ -81,7 +87,7 @@ class NumberPlateGameFragment(): Fragment(R.layout.fragment_number_plate_game) {
 
     private fun playAgain() {
         complete_layout.visibility = View.GONE
-        viewModel.resetPlates()
+        gameViewModel.resetPlates()
     }
 
     private fun onPlateFound() {
@@ -132,11 +138,11 @@ class NumberPlateGameFragment(): Fragment(R.layout.fragment_number_plate_game) {
 
 
     private fun searchStates(text: String) {
-        viewModel.filterPlates(text)
+        gameViewModel.filterPlates(text)
     }
 
     private fun clearSearch() {
-        viewModel.clearSearch()
+        gameViewModel.clearSearch()
     }
 
     companion object {

@@ -13,7 +13,7 @@ interface NumberPlateGameComponent {
     interface Builder {
 
         @BindsInstance
-        fun activity(activity: AppCompatActivity)
+        fun activity(activity: AppCompatActivity): Builder
 
         fun build(): NumberPlateGameComponent
     }

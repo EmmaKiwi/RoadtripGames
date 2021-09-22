@@ -1,8 +1,10 @@
 package com.mercari.roadtripgames.login
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.mercari.roadtripgames.R
@@ -85,6 +87,10 @@ class LoginActivity: AppCompatActivity() {
         }
         stay_logged_in.setOnCheckedChangeListener { buttonView, isChecked ->
             viewModel.onStayLoggedInChecked(isChecked)
+        }
+        background.setOnClickListener {
+            (getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
+                .hideSoftInputFromWindow(it.windowToken, 0)
         }
     }
 

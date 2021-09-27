@@ -1,8 +1,10 @@
 package com.mercari.roadtripgames.games.numberplate.home
 
 import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
@@ -36,9 +38,24 @@ class NumberPlateHomeFragment: Fragment(R.layout.fragment_number_plate_home) {
         setupListeners()
     }
 
+    private fun openNewGameDialog() {
+        val dialog = AlertDialog.Builder(requireContext()).apply {
+            this.setView(R.layout.dialog_new_number_plate_game)
+            this.setPositiveButton(R.string.number_plate_done) { dialog, _ ->
+                val name = "Me"
+                viewModel.addNewGame(name)
+                dialog.dismiss()
+            }
+            this.setNegativeButton(R.string.number_plate_cancel) { dialog, _ ->
+                dialog.dismiss()
+            }
+        }
+        dialog.show()
+    }
+
     private fun setupListeners() {
         new_game_button.setOnClickListener {
-            createNewGame()
+            openNewGameDialog()
         }
     }
 
@@ -48,7 +65,7 @@ class NumberPlateHomeFragment: Fragment(R.layout.fragment_number_plate_home) {
             setOnMenuItemClickListener { item ->
                 when (item.itemId) {
                     R.id.new_game -> {
-                        createNewGame()
+                        openNewGameDialog()
                         true
                     }
                     else -> false
@@ -58,10 +75,6 @@ class NumberPlateHomeFragment: Fragment(R.layout.fragment_number_plate_home) {
             setNavigationOnClickListener { navigator.back() }
             setTitle(R.string.number_plate_title)
         }
-    }
-
-    private fun createNewGame() {
-        viewModel.addNewGame()
     }
 
     companion object {

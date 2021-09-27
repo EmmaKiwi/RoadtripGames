@@ -166,7 +166,9 @@ class NumberPlateGameFragment: Fragment(R.layout.fragment_number_plate_game) {
         private const val EXTRA_GAME_ID = "extra_game_id"
 
         fun getInstance(gameId: String) = NumberPlateGameFragment().apply {
-            arguments?.putString(EXTRA_GAME_ID, gameId)
+            this.arguments = Bundle().apply {
+                putString(EXTRA_GAME_ID, gameId)
+            }
         }
     }
 }

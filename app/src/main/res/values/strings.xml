@@ -34,4 +34,7 @@
     <string name="play_again">Play again?</string>
     <string name="no_games">You don\'t have any open games at the moment.</string>
     <string name="new_game">Start a new game</string>
+    <string name="number_plate_new_game_title">Please enter a name for your new game:</string>
+    <string name="number_plate_done">Done</string>
+    <string name="number_plate_cancel">Cancel</string>
 </resources>

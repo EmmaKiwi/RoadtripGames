@@ -11,5 +11,5 @@ data class NumberPlate(
     @ColumnInfo val type: NumberPlateType,
     @ColumnInfo var isFound: Boolean = false,
     @ColumnInfo var dateFound: String? = null,
-    @ColumnInfo var gameId: String = ""
+    @ColumnInfo var gameId: String
 )

@@ -16,13 +16,7 @@ class NumberPlateGameViewModel @Inject constructor(
     private var filterString = MutableLiveData<String?>()
     private val allNumberPlates = MediatorLiveData<List<NumberPlate>>().apply {
         addSource(repository.getNumberPlates(gameId)) { plates ->
-            value = if (plates.isEmpty()) {
-                val generatedPlates = generatePlates()
-                insertNewPlates(generatedPlates)
-                generatedPlates.sortedBy { it.isFound }
-            } else {
-                plates.sortedBy { it.isFound }
-            }
+            value = plates.sortedBy { it.isFound }
         }
     }
     val numberPlates = Transformations.switchMap(filterString) { filter ->
@@ -72,17 +66,5 @@ class NumberPlateGameViewModel @Inject constructor(
             val allFound = numberPlates.value?.all { it.isFound }
             isAllPlatesFound.postValue(allFound)
         }
-    }
-
-    private fun generatePlates(): List<NumberPlate> {
-        val plates = mutableListOf<NumberPlate>()
-        NumberPlateType.values().forEach {
-            plates.add(
-                NumberPlate(
-                    type = it
-                )
-            )
-        }
-        return plates
     }
 }

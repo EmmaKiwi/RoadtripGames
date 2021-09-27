@@ -7,5 +7,8 @@ import androidx.room.PrimaryKey
 data class NumberPlateGame(
     @PrimaryKey
     val gameId: String,
-    val userId: Long
+    val userId: Long,
+    var name: String,
+    val dateCreated: Long,
+    var dateModified: Long
 )

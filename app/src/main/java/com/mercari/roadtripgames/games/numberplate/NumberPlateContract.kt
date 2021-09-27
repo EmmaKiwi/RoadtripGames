@@ -20,6 +20,7 @@ interface NumberPlateContract {
 
     interface HomeRepository {
         fun getAllGames(userId: Long): LiveData<List<NumberPlateGame>>
+        suspend fun addGamePlates(plates: List<NumberPlate>)
         suspend fun addNewGame(game: NumberPlateGame)
     }
 }

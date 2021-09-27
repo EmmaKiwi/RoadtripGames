@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.mercari.roadtripgames.R
@@ -66,7 +67,7 @@ class LoginActivity: AppCompatActivity() {
         })
         viewModel.userNotFoundError.observe(this, Observer { notFound ->
             if (notFound) {
-                toastProvider.showToast("Username and password combination is invalid.")
+                toastProvider.showToastOnTop("Username and password combination is invalid.")
             }
         })
     }

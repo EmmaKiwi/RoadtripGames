@@ -3,14 +3,21 @@ package com.mercari.roadtripgames.games.numberplate.home
 import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.EditText
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.RecyclerView
 import com.mercari.roadtripgames.R
 import com.mercari.roadtripgames.RoadTripApplication
 import com.mercari.roadtripgames.games.numberplate.NumberPlateContract
+import com.mercari.roadtripgames.games.numberplate.model.NumberPlateGame
 import kotlinx.android.synthetic.main.fragment_number_plate_home.*
 import javax.inject.Inject
 
@@ -20,6 +27,8 @@ class NumberPlateHomeFragment: Fragment(R.layout.fragment_number_plate_home) {
     lateinit var viewModel: NumberPlateHomeViewModel
     @Inject
     lateinit var navigator: NumberPlateContract.Navigator
+
+    private val gameAdapter = NumberPlateHomeAdapter()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -36,13 +45,46 @@ class NumberPlateHomeFragment: Fragment(R.layout.fragment_number_plate_home) {
         super.onViewCreated(view, savedInstanceState)
         setupToolbar()
         setupListeners()
+        observeGames()
+    }
+
+    private fun observeGames() {
+        viewModel.games.observe(viewLifecycleOwner, Observer { games ->
+            if (games.isEmpty()) {
+                showEmptyGameView()
+            } else {
+                showGames(games)
+            }
+        })
+    }
+
+    private fun showGames(games: List<NumberPlateGame>) {
+        requireView().apply {
+            findViewById<View>(R.id.empty_game_layout).isVisible = false
+            findViewById<View>(R.id.game_list_layout).isVisible = true
+            findViewById<RecyclerView>(R.id.game_list).apply {
+                this.adapter = gameAdapter
+            }
+        }
+        gameAdapter.setGames(games)
+    }
+
+    private fun showEmptyGameView() {
+        requireView().apply {
+            findViewById<View>(R.id.empty_game_layout).isVisible = true
+            findViewById<View>(R.id.game_list_layout).isVisible = false
+        }
     }
 
     private fun openNewGameDialog() {
+        val suggestedTitle = viewModel.generateNewGameTitle()
+        val dialogView = LayoutInflater.from(requireContext())
+            .inflate(R.layout.dialog_new_number_plate_game, null, false)
+        dialogView.findViewById<TextView>(R.id.number_plate_title_text_entry).setText(suggestedTitle, TextView.BufferType.EDITABLE)
         val dialog = AlertDialog.Builder(requireContext()).apply {
-            this.setView(R.layout.dialog_new_number_plate_game)
+            this.setView(dialogView)
             this.setPositiveButton(R.string.number_plate_done) { dialog, _ ->
-                val name = "Me"
+                val name = dialogView.findViewById<EditText>(R.id.number_plate_title_text_entry).text.toString()
                 viewModel.addNewGame(name)
                 dialog.dismiss()
             }

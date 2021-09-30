@@ -19,6 +19,8 @@ class NumberPlateHomeViewModel @Inject constructor(
         repository.getAllGames(it.id)
     } ?: repository.getAllGames(GUEST_ID)
 
+    val games = allGames
+
     fun addNewGame(name: String) {
         val userId = auth.getUser()?.id ?: GUEST_ID
         val currentTime = System.currentTimeMillis()
@@ -28,6 +30,16 @@ class NumberPlateHomeViewModel @Inject constructor(
             repository.addGamePlates(generatePlates(newGame.gameId))
             navigator.showGameFragment(newGame.gameId)
         }
+    }
+
+    fun generateNewGameTitle(): String {
+        var suggestedTitle = "${auth.getUser()?.username ?: ""}'s Game"
+        var count = 1
+        while (allGames.value?.find { it.name == suggestedTitle } != null) {
+            suggestedTitle = "$suggestedTitle $count"
+            count += 1
+        }
+        return suggestedTitle
     }
 
     private fun generatePlates(gameId: String): List<NumberPlate> {

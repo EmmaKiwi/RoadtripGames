@@ -9,5 +9,8 @@
     <dimen name="round_corner">5dp</dimen>
 
     <dimen name="title_text_size">32sp</dimen>
+    <dimen name="dialog_title_text_size">24sp</dimen>
+    <dimen name="l_text_size">24sp</dimen>
+    <dimen name="med_text_size">18sp</dimen>
     <dimen name="sm_text_size">12sp</dimen>
 </resources>

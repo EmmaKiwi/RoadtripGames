@@ -67,6 +67,11 @@ class NumberPlateHomeFragment: Fragment(R.layout.fragment_number_plate_home) {
             }
         }
         gameAdapter.setGames(games)
+        gameAdapter.setOnGameClickListener(::onGameClicked)
+    }
+
+    private fun onGameClicked(game: NumberPlateGame) {
+        navigator.showGameFragment(game.gameId)
     }
 
     private fun showEmptyGameView() {

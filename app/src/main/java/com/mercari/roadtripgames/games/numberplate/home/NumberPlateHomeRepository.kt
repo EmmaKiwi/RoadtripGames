@@ -20,4 +20,6 @@ class NumberPlateHomeRepository @Inject constructor(
     override suspend fun addGamePlates(numberPlates: List<NumberPlate>) =
         database.numberPlateDao().insertAll(numberPlates)
 
+    override suspend fun deleteGame(game: NumberPlateGame) =
+        database.numberPlateGameDao().deleteGame(game)
 }

@@ -22,5 +22,6 @@ interface NumberPlateContract {
         fun getAllGames(userId: Long): LiveData<List<NumberPlateGame>>
         suspend fun addGamePlates(plates: List<NumberPlate>)
         suspend fun addNewGame(game: NumberPlateGame)
+        suspend fun deleteGame(game: NumberPlateGame)
     }
 }

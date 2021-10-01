@@ -2,6 +2,7 @@ package com.mercari.roadtripgames.games.numberplate.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.mercari.roadtripgames.games.numberplate.model.NumberPlateGame
@@ -17,6 +18,9 @@ interface NumberPlateGameDao {
 
     @Query("SELECT * from numberplategame where gameId = :gameId")
     fun getByGameId(gameId: String): LiveData<NumberPlateGame>
+
+    @Delete
+    suspend fun deleteGame(game: NumberPlateGame)
 
     @Insert
     suspend fun insert(game: NumberPlateGame)

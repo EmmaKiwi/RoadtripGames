@@ -1,10 +1,9 @@
 package com.mercari.roadtripgames.games.numberplate.home
 
 import android.content.Context
-import android.content.DialogInterface
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
+import android.view.*
+import android.widget.AdapterView
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
@@ -20,6 +19,7 @@ import com.mercari.roadtripgames.games.numberplate.NumberPlateContract
 import com.mercari.roadtripgames.games.numberplate.model.NumberPlateGame
 import kotlinx.android.synthetic.main.fragment_number_plate_home.*
 import javax.inject.Inject
+
 
 class NumberPlateHomeFragment: Fragment(R.layout.fragment_number_plate_home) {
 
@@ -45,6 +45,7 @@ class NumberPlateHomeFragment: Fragment(R.layout.fragment_number_plate_home) {
         super.onViewCreated(view, savedInstanceState)
         setupToolbar()
         setupListeners()
+        setupRecyclerView()
         observeGames()
     }
 
@@ -58,16 +59,24 @@ class NumberPlateHomeFragment: Fragment(R.layout.fragment_number_plate_home) {
         })
     }
 
-    private fun showGames(games: List<NumberPlateGame>) {
+    private fun setupRecyclerView() {
         requireView().apply {
-            findViewById<View>(R.id.empty_game_layout).isVisible = false
-            findViewById<View>(R.id.game_list_layout).isVisible = true
             findViewById<RecyclerView>(R.id.game_list).apply {
                 this.adapter = gameAdapter
             }
         }
-        gameAdapter.setGames(games)
+        gameAdapter.setOnDeleteGameClickListener {
+            viewModel.deleteGame(it)
+        }
         gameAdapter.setOnGameClickListener(::onGameClicked)
+    }
+
+    private fun showGames(games: List<NumberPlateGame>) {
+        requireView().apply {
+            findViewById<View>(R.id.empty_game_layout).isVisible = false
+            findViewById<View>(R.id.game_list_layout).isVisible = true
+        }
+        gameAdapter.setGames(games)
     }
 
     private fun onGameClicked(game: NumberPlateGame) {

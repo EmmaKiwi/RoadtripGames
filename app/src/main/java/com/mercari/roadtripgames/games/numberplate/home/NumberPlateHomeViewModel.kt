@@ -42,6 +42,12 @@ class NumberPlateHomeViewModel @Inject constructor(
         return suggestedTitle
     }
 
+    fun deleteGame(game: NumberPlateGame) {
+        viewModelScope.launch {
+            repository.deleteGame(game)
+        }
+    }
+
     private fun generatePlates(gameId: String): List<NumberPlate> {
         val plates = mutableListOf<NumberPlate>()
         NumberPlateType.values().forEach {

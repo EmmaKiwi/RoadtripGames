@@ -38,6 +38,9 @@
     <string name="number_plate_done">Done</string>
     <string name="number_plate_cancel">Cancel</string>
 
+    <!-- Twenty Questions -->
+    <string name="twenty_questions_title">Twenty Questions</string>
+
     <!-- Menu -->
     <string name="delete_game">Delete</string>
 </resources>

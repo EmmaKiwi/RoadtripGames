@@ -42,6 +42,9 @@ class HomeActivity : AppCompatActivity() {
         number_plate_game.setOnClickListener {
             navigator.openNumberPlateGame()
         }
+        twenty_questions_game.setOnClickListener {
+            navigator.openTwentyQuestions()
+        }
     }
 
     private fun observeUser() {

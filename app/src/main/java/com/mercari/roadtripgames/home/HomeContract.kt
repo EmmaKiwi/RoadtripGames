@@ -4,5 +4,6 @@ interface HomeContract {
 
     interface Navigator {
         fun openNumberPlateGame()
+        fun openTwentyQuestions()
     }
 }

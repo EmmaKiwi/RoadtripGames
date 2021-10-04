@@ -10,11 +10,21 @@ import com.mercari.roadtripgames.auth.user.User
 import com.mercari.roadtripgames.auth.user.UserDao
 import com.mercari.roadtripgames.games.numberplate.database.NumberPlateGameDao
 import com.mercari.roadtripgames.games.numberplate.model.NumberPlateGame
+import com.mercari.roadtripgames.games.twentyquestions.database.QuestionCategoryDao
+import com.mercari.roadtripgames.games.twentyquestions.model.QuestionCategory
 
-@Database(entities = [NumberPlate::class, NumberPlateGame::class, User::class], version = 1)
+@Database(
+    entities = [
+        NumberPlate::class,
+        NumberPlateGame::class,
+        User::class,
+        QuestionCategory::class
+   ], version = 1
+)
 @TypeConverters(NumberPlateConverter::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun numberPlateDao(): NumberPlateDao
     abstract fun numberPlateGameDao(): NumberPlateGameDao
     abstract fun userDao(): UserDao
+    abstract fun questionCategoryDao(): QuestionCategoryDao
 }

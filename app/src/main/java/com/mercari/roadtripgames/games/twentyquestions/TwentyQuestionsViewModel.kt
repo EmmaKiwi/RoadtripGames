@@ -6,4 +6,6 @@ import javax.inject.Inject
 class TwentyQuestionsViewModel @Inject constructor(
     private val repository: TwentyQuestionsContract.Repository
 ) : ViewModel() {
+
+    val questionCategories = repository.getQuestionCategories()
 }

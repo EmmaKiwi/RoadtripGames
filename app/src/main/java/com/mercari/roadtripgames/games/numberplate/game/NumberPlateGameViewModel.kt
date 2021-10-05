@@ -54,12 +54,6 @@ class NumberPlateGameViewModel @Inject constructor(
         filterString.postValue(null)
     }
 
-    fun insertNewPlates(plates: List<NumberPlate>) {
-        viewModelScope.launch {
-            repository.insertNumberPlates(plates)
-        }
-    }
-
     fun onPlateUpdated(plate: NumberPlate) {
         viewModelScope.launch {
             repository.updatePlate(plate)

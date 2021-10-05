@@ -8,9 +8,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mercari.roadtripgames.R
 import com.mercari.roadtripgames.games.twentyquestions.model.QuestionCategory
 
-class QuestionCategoryAdapter(
-    private val categories: List<QuestionCategory>
-): RecyclerView.Adapter<QuestionCategoryAdapter.ViewHolder>() {
+class QuestionCategoryAdapter(): RecyclerView.Adapter<QuestionCategoryAdapter.ViewHolder>() {
+
+    private val categories: MutableList<QuestionCategory> = mutableListOf()
+
+    fun setCategories(newCategories: List<QuestionCategory>) {
+        categories.clear()
+        categories.addAll(newCategories)
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)

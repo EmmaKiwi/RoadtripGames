@@ -10,7 +10,11 @@ import com.mercari.roadtripgames.auth.user.User
 import com.mercari.roadtripgames.auth.user.UserDao
 import com.mercari.roadtripgames.games.numberplate.database.NumberPlateGameDao
 import com.mercari.roadtripgames.games.numberplate.model.NumberPlateGame
+import com.mercari.roadtripgames.games.twentyquestions.database.MovieDao
+import com.mercari.roadtripgames.games.twentyquestions.database.PersonDao
 import com.mercari.roadtripgames.games.twentyquestions.database.QuestionCategoryDao
+import com.mercari.roadtripgames.games.twentyquestions.model.Movie
+import com.mercari.roadtripgames.games.twentyquestions.model.Person
 import com.mercari.roadtripgames.games.twentyquestions.model.QuestionCategory
 
 @Database(
@@ -18,7 +22,9 @@ import com.mercari.roadtripgames.games.twentyquestions.model.QuestionCategory
         NumberPlate::class,
         NumberPlateGame::class,
         User::class,
-        QuestionCategory::class
+        QuestionCategory::class,
+        Person::class,
+        Movie::class
    ], version = 1
 )
 @TypeConverters(NumberPlateConverter::class)
@@ -27,4 +33,6 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun numberPlateGameDao(): NumberPlateGameDao
     abstract fun userDao(): UserDao
     abstract fun questionCategoryDao(): QuestionCategoryDao
+    abstract fun personDao(): PersonDao
+    abstract fun movieDao(): MovieDao
 }

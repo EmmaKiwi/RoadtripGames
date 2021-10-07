@@ -1,40 +1,39 @@
 package com.mercari.roadtripgames.games.twentyquestions
 
 import com.mercari.roadtripgames.database.AppDatabase
+import com.mercari.roadtripgames.games.twentyquestions.data.MovieData
+import com.mercari.roadtripgames.games.twentyquestions.data.PeopleData
 import com.mercari.roadtripgames.games.twentyquestions.model.QuestionCategory
+import com.mercari.roadtripgames.games.twentyquestions.model.QuestionCategoryData
 import javax.inject.Inject
 
 class TwentyQuestionsRepository @Inject constructor(
     private val database: AppDatabase
-): TwentyQuestionsContract.Repository {
+) : TwentyQuestionsContract.Repository {
 
     override fun getQuestionCategories() = database.questionCategoryDao().getAll()
 
     override suspend fun generateDefaultCategories() {
         val categories = createDefaultCategories()
-        database.questionCategoryDao().insertAll(categories)
+        database.questionCategoryDao().insertAll(categories.map { it.toQuestionCategory() })
+        categories.forEach {
+            when (it) {
+                QuestionCategoryData.PERSON -> generatePeople(it.id)
+                QuestionCategoryData.MOVIE -> generateMovies(it.id)
+            }
+        }
     }
 
-    private fun createDefaultCategories() = listOf(
-        QuestionCategory(
-            title = "Animal",
-            subtitle = "Generate a random animal"
-        ),
-        QuestionCategory(
-            title = "Plant",
-            subtitle = "Generate a random plant"
-        ),
-        QuestionCategory(
-            title = "Mineral",
-            subtitle = "Something that isn't an animal or a plant"
-        ),
-        QuestionCategory(
-            title = "Person",
-            subtitle = "A famous person, alive or dead"
-        ),
-        QuestionCategory(
-            title = "Event",
-            subtitle = "A famous event from history"
-        )
-    )
+    private suspend fun generatePeople(categoryId: Long) {
+        val people = PeopleData.getPeople(categoryId)
+        database.personDao().insertAll(people)
+    }
+
+    private suspend fun generateMovies(categoryId: Long) {
+        val movies = MovieData.getMovies(categoryId)
+        database.movieDao().insertAll(movies)
+    }
+
+    private fun createDefaultCategories() =
+        QuestionCategoryData.values()
 }

@@ -4,9 +4,9 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class QuestionCategory(
+data class SubCategory(
     @PrimaryKey(autoGenerate = false)
     val id: Long,
-    val title: String,
-    val subtitle: String
+    val name: String,
+    val categoryId: Long
 )

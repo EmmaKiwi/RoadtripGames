@@ -15,7 +15,9 @@ class TwentyQuestionsRepository @Inject constructor(
 
     override suspend fun generateDefaultCategories() {
         val categories = createDefaultCategories()
+        val peopleCategories = PeopleData.PeopleCategories.values()
         database.questionCategoryDao().insertAll(categories.map { it.toQuestionCategory() })
+        database.questionCategoryDao().insertAll(peopleCategories.map { it.toQuestionCategory() })
         categories.forEach {
             when (it) {
                 QuestionCategoryData.PERSON -> generatePeople(it.id)

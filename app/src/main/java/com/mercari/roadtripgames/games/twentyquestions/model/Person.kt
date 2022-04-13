@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Person(
-    @PrimaryKey(autoGenerate = false)
+    @PrimaryKey(autoGenerate = true)
     var id: Long = 0,
     val name: String,
     val subCategoryId: Long,

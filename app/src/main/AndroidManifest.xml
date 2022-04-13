@@ -33,7 +33,7 @@
             android:theme="@style/Theme.RoadtripGames.NoActionBar" />
         <activity
             android:name="com.mercari.roadtripgames.games.twentyquestions.TwentyQuestionsActivity"
-            android:theme="@style/Theme.RoadtripGames.NoActionBar" />
+            android:theme="@style/Theme.RoadtripGames" />
     </application>
 
 </manifest>

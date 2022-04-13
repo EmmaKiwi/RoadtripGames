@@ -16,6 +16,7 @@ enum class QuestionCategoryData(
     fun toQuestionCategory() = QuestionCategory(
         id = id,
         title = title,
-        subtitle = subTitle
+        subtitle = subTitle,
+        parentId = 0
     )
 }

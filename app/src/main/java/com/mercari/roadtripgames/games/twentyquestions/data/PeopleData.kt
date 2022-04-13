@@ -1,15 +1,22 @@
 package com.mercari.roadtripgames.games.twentyquestions.data
 
 import com.mercari.roadtripgames.games.twentyquestions.model.Person
+import com.mercari.roadtripgames.games.twentyquestions.model.QuestionCategory
 
 class PeopleData {
 
-    enum class PeopleCategories(val subCatgoryId: Long) {
-        SPORTS(0),
-        ACTOR(1),
-        POLITICIAN(2),
-        FICTIONAL(3),
-        ARTIST(4)
+    enum class PeopleCategories(val subCatgoryId: Long, val title: String) {
+        SPORTS(0, "Sportspeople"),
+        ACTOR(1, "Actors"),
+        POLITICIAN(2, "Politicians"),
+        FICTIONAL(3, "Fictional"),
+        ARTIST(4, "Artists");
+
+        fun toQuestionCategory(parentId: Long) = QuestionCategory(
+            title = title,
+            subtitle = "",
+            parentId = parentId
+        )
     }
 
     companion object {
